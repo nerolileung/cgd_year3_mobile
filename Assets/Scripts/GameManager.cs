@@ -17,8 +17,6 @@ public class GameManager : MonoBehaviour
     {
         currentControls = CONTROL_SCHEME.BUTTONS;
         DontDestroyOnLoad(this.gameObject);
-        // temp
-        LoadLevel(0);
     }
 
     // Update is called once per frame
