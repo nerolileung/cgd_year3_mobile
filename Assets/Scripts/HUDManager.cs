@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
     private GameObject _camera;
     private float cameraOffset;

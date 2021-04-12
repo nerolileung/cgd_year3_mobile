@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 282212353}
   - component: {fileID: 282212352}
   m_Layer: 0
-  m_Name: LevelManager
+  m_Name: HUDManager
   m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &663000709
 RectTransform:
   m_ObjectHideFlags: 0
