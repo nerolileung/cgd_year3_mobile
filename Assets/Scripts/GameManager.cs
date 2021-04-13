@@ -8,10 +8,10 @@ public class GameManager : MonoBehaviour
     public enum CONTROL_SCHEME {
         SWIPE, TOUCH, BUTTONS
     }
-    private CONTROL_SCHEME currentControls;
-    private int points;
-    // private Toy currentToy;
-    private Dictionary<string, bool> flags;
+    private static CONTROL_SCHEME currentControls;
+    private static int points;
+    // private static Toy currentToy;
+    private static Dictionary<string, bool> flags;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         currentControls = CONTROL_SCHEME.BUTTONS;
         points = 0;
         // todo current toy
+        flags = new Dictionary<string, bool>();
         flags["PAUSED"] = false;
         flags["TUTORIAL_COMPLETE"] = false;
 
