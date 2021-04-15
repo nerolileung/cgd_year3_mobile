@@ -9,6 +9,16 @@ public class GameManager : MonoBehaviour
         SWIPE, TOUCH, BUTTONS
     }
     public enum CLOTHES_COLOUR {
+        DARK_PAPER = 0,
+        DARK_GREEN,
+        DARK_RED,
+        DARK_BLUE,
+        DARK_PURPLE,
+        LIGHT_INK,
+        LIGHT_GREEN,
+        LIGHT_RED,
+        LIGHT_BLUE,
+        LIGHT_PURPLE
     }
     private static CONTROL_SCHEME currentControls;
     private static int points;
