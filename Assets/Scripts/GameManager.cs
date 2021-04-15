@@ -8,9 +8,13 @@ public class GameManager : MonoBehaviour
     public enum CONTROL_SCHEME {
         SWIPE, TOUCH, BUTTONS
     }
+    public enum CLOTHES_COLOUR {
+    }
     private static CONTROL_SCHEME currentControls;
     private static int points;
     // private static Toy currentToy;
+    private static int playerSkinColour;
+    private static CLOTHES_COLOUR playerClothesColour;
     private static Dictionary<string, bool> flags;
 
     // Start is called before the first frame update
@@ -57,5 +61,21 @@ public class GameManager : MonoBehaviour
     }
     public void SetFlag(string flag, bool value){
         flags[flag] = value;
+    }
+
+    public int GetSkinColour(){
+        return playerSkinColour;
+    }
+    public CLOTHES_COLOUR GetClothesColour(){
+        return playerClothesColour;
+    }
+    public void SetSkinColour(int colour){
+        if (colour < 0 || colour > 9){
+            Debug.Log("incorrect skin index given: "+colour);
+        }
+        playerSkinColour = colour;
+    }
+    public void SetClothesColour(CLOTHES_COLOUR colour){
+        playerClothesColour = colour;
     }
 }
