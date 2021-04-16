@@ -18,6 +18,12 @@ public class PlayerColourButton : MonoBehaviour
         if (images == null){
             images = new Sprite[10,10];
             // todo
+            for (int i = 0; i < 1; i++){
+                for (int j = 0; j < 10; j++){
+                    Sprite[] sprites = Resources.LoadAll<Sprite>("player_"+i+j);
+                    images[i,j] = sprites[2];
+                }
+            }
         }
     }
 
@@ -30,6 +36,8 @@ public class PlayerColourButton : MonoBehaviour
         UpdateImage();
     }
     private void UpdateImage(){
-        // todo
+        int skin = _gameManager.GetSkinColour();
+        int clothes = (int)_gameManager.GetClothesColour();
+        playerImage.sprite = images[skin,clothes];
     }
 }
