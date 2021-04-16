@@ -17,8 +17,7 @@ public class PlayerColourButton : MonoBehaviour
             playerImage = GameObject.Find("Character Sprite").GetComponent<Image>();
         if (images == null){
             images = new Sprite[10,10];
-            // todo
-            for (int i = 0; i < 1; i++){
+            for (int i = 0; i < 10; i++){
                 for (int j = 0; j < 10; j++){
                     Sprite[] sprites = Resources.LoadAll<Sprite>("player_"+i+j);
                     images[i,j] = sprites[2];
