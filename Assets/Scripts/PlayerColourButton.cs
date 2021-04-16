@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerColourButton : MonoBehaviour
 {
-    private static GameManager _gameManager;
     private static Image playerImage;
     private static Sprite[,] images;
 
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         if (playerImage == null)
             playerImage = GameObject.Find("Character Sprite").GetComponent<Image>();
         if (images == null){
@@ -27,16 +25,16 @@ public class PlayerColourButton : MonoBehaviour
     }
 
     public void SetSkin(int colour){
-        _gameManager.SetSkinColour(colour);
+        GameManager.SetSkinColour(colour);
         UpdateImage();
     }
     public void SetClothes(int colour){
-        _gameManager.SetClothesColour((GameManager.CLOTHES_COLOUR)colour);
+        GameManager.SetClothesColour((GameManager.CLOTHES_COLOUR)colour);
         UpdateImage();
     }
     private void UpdateImage(){
-        int skin = _gameManager.GetSkinColour();
-        int clothes = (int)_gameManager.GetClothesColour();
+        int skin = GameManager.GetSkinColour();
+        int clothes = (int)GameManager.GetClothesColour();
         playerImage.sprite = images[skin,clothes];
     }
 }

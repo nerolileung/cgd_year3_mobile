@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Animator animator;
-    private Rigidbody2D rb;
-
-    private GameManager _gameManager;
-    
+    public enum PLAYER_STATE{
+        RUNNING,
+        JUMPING,
+        SLIDING,
+        DEAD
+    }
+    private Rigidbody2D rb;    
     private Vector2 touchStart;
     private Vector2 touchEnd;
+    private PLAYER_STATE currentState;
     private float jumpForce;
-    private bool isAlive;
     
     // Start is called before the first frame update
     void Start()
     {
-        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-
-        animator = GetComponent<Animator>();
-        animator.SetBool("isJumping",false);
-        animator.SetBool("isSliding",false);
-
         rb = GetComponent<Rigidbody2D>();
 
         jumpForce = 10f;
 
-        isAlive = true;
+        currentState = PLAYER_STATE.RUNNING;
     }
 
     // Update is called once per frame
@@ -37,61 +33,74 @@ public class Player : MonoBehaviour
         if (Input.touchCount > 0){
             Touch currentTouch = Input.GetTouch(0);
             // all controls: stop sliding when screen isn't touched
-            if (animator.GetBool("isSliding") && currentTouch.phase == TouchPhase.Ended) {
-                animator.SetBool("isSliding",false);
+            if (currentState == PLAYER_STATE.SLIDING && currentTouch.phase == TouchPhase.Ended) {
+                SetState(PLAYER_STATE.RUNNING);
             }
             // single finger tap to jump, double finger hold to slide
-            if (_gameManager.GetControls() == GameManager.CONTROL_SCHEME.TOUCH){
+            if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.TOUCH){
                 // slide
                 if (Input.touchCount == 2){
-                    if (currentTouch.phase == TouchPhase.Began && !animator.GetBool("isSliding"))
-                        Slide();
+                    if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.SLIDING)
+                        SetState(PLAYER_STATE.SLIDING);
                 }
                 // jump
                 else {
-                    if (currentTouch.phase == TouchPhase.Began && !animator.GetBool("isJumping"))
-                        Jump();
+                    if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.JUMPING)
+                        SetState(PLAYER_STATE.JUMPING);
                 }
             }
             // swipe up to jump, down + hold to slide
-            else if (_gameManager.GetControls() == GameManager.CONTROL_SCHEME.SWIPE){
+            else if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.SWIPE){
                 if (currentTouch.phase == TouchPhase.Began)
                     touchStart = currentTouch.position;
                 else if (currentTouch.phase == TouchPhase.Moved){
                     touchEnd = currentTouch.position;
                     // swipe up
-                    if (touchEnd.y - touchStart.y > 0 && !animator.GetBool("isJumping"))
-                        Jump();
+                    if (touchEnd.y - touchStart.y > 0 && currentState!=PLAYER_STATE.JUMPING)
+                        SetState(PLAYER_STATE.JUMPING);
                     // swipe down
-                    else if (touchEnd.y - touchStart.y < 0 && !animator.GetBool("isSliding"))
-                        Slide();
+                    else if (touchEnd.y - touchStart.y < 0 && currentState!=PLAYER_STATE.SLIDING)
+                        SetState(PLAYER_STATE.SLIDING);
                 }
             }
         }
     }
+    void LateUpdate(){
+        // collision shape changes go here
+    }
+    private void SetState(PLAYER_STATE state){
+        // sprite animation goes here
+        switch(state){
+            case PLAYER_STATE.JUMPING:
+                rb.AddForce(transform.up * jumpForce,ForceMode2D.Impulse);
+            break;
+            default:
+            break;
+        }
+        currentState = state;
+    }
 
     void OnTriggerEnter2D(Collider2D collider){
         if (collider.tag == "Danger"){
-            isAlive = false;
+            SetState(PLAYER_STATE.DEAD);
         }
     }
     void OnCollisionEnter2D(Collision2D collision){
-        if (animator.GetBool("isJumping"))
-            animator.SetBool("isJumping",false);
+        if (currentState == PLAYER_STATE.JUMPING)
+            SetState(PLAYER_STATE.RUNNING);
     }
 
     public void Jump(){
-        if (!animator.GetBool("isJumping")){
-            animator.SetBool("isJumping",true);
-            rb.AddForce(transform.up * jumpForce,ForceMode2D.Impulse);
+        if (currentState != PLAYER_STATE.JUMPING){
+            SetState(PLAYER_STATE.JUMPING);
         }
     }
     public void Slide(){
-        if (!animator.GetBool("isSliding")){
-            animator.SetBool("isSliding",true);
+        if (currentState != PLAYER_STATE.SLIDING){
+            SetState(PLAYER_STATE.JUMPING);
         }
     }
     public bool IsAlive(){
-         return isAlive;
+         return currentState != PLAYER_STATE.DEAD;
     }
 }

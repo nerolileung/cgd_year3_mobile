@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelInfo : ScriptableObject
 {
     public string title;
-    //public Sprite image;
+    //public Sprite icon;
     public float startSpeed;
     public float endSpeed;
     // length in units/100px

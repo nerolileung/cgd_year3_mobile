@@ -8,7 +8,6 @@ public class HUDManager : MonoBehaviour
     private GameObject _camera;
     private float cameraOffset;
     private Player _player;
-    private GameManager _gameManager;
 
     private LevelInfo _info;
     private float currentSpeed;
@@ -30,9 +29,7 @@ public class HUDManager : MonoBehaviour
         cameraOffset = _camera.transform.position.x; // initial x pos
 
         _player = _camera.GetComponentInChildren<Player>();
-
-        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        if (_gameManager.GetControls()==GameManager.CONTROL_SCHEME.BUTTONS)
+        if (GameManager.GetControls()==GameManager.CONTROL_SCHEME.BUTTONS)
             buttons.SetActive(true);
         else buttons.SetActive(false);
 

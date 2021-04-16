@@ -4,22 +4,22 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 6793899615021998247
-    second: player_17_0
+    second: player_17_run1
   - first:
       213: -7492677014031416844
-    second: player_17_1
+    second: player_17_run2
   - first:
       213: -7855948816138687772
-    second: player_17_2
+    second: player_17_jump1
   - first:
       213: 6639454056260224202
-    second: player_17_3
+    second: player_17_jump2
   - first:
       213: -1250319993873397441
-    second: player_17_4
+    second: player_17_slide1
   - first:
       213: 8081534549086933024
-    second: player_17_5
+    second: player_17_slide2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -119,19 +119,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_17_0
+      name: player_17_run1
       rect:
         serializedVersion: 2
         x: 0
-        y: 198
+        y: 197
         width: 200
-        height: 299
+        height: 300
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 100, y: 46.5}
+        - {x: 100, y: 101.5}
+        - {x: 71, y: 146.5}
+        - {x: 57, y: 149.5}
+        - {x: -6, y: 149.5}
+        - {x: -37, y: 136.5}
+        - {x: -68, y: 97.5}
+        - {x: -98, y: 85.5}
+        - {x: -100, y: 77.5}
+        - {x: -100, y: 65.5}
+        - {x: -95, y: 61.5}
+        - {x: -87, y: 57.5}
+        - {x: -81, y: 55.5}
+        - {x: -75, y: 59.5}
+        - {x: -17, y: -2.5}
+        - {x: -75, y: -60.5}
+        - {x: -80, y: -74.5}
+        - {x: -71, y: -147.5}
+        - {x: -9, y: -148.5}
+        - {x: -8, y: -149.5}
+        - {x: 35, y: -149.5}
+        - {x: 45, y: -130.5}
+        - {x: 45, y: -19.5}
+        - {x: 85, y: 22.5}
+      tessellationDetail: 0.1
       bones: []
       spriteID: 7a0ac0944b7c84e50800000000000000
       internalID: 6793899615021998247
@@ -140,15 +164,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_17_1
+      name: player_17_run2
       rect:
         serializedVersion: 2
         x: 205
         y: 197
-        width: 199
+        width: 200
         height: 300
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,19 +185,41 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_17_2
+      name: player_17_jump1
       rect:
         serializedVersion: 2
-        x: 411
+        x: 406
         y: 227
-        width: 178
+        width: 184
         height: 272
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 89, y: 14}
+        - {x: 89, y: 85}
+        - {x: 82, y: 121}
+        - {x: 39, y: 136}
+        - {x: -33, y: 136}
+        - {x: -47, y: 129}
+        - {x: -89, y: 59}
+        - {x: -89, y: 25}
+        - {x: -65, y: 22}
+        - {x: -63, y: 30}
+        - {x: -60, y: 40}
+        - {x: -62, y: 43}
+        - {x: -60, y: 41}
+        - {x: -59, y: 34}
+        - {x: -53, y: 21}
+        - {x: -43, y: -23}
+        - {x: -79, y: -100}
+        - {x: -51, y: -136}
+        - {x: 18, y: -136}
+        - {x: 30, y: -128}
+        - {x: 55, y: -95}
+        - {x: 41, y: -53}
+      tessellationDetail: 0.1
       bones: []
       spriteID: 4ea2760ac201af290800000000000000
       internalID: -7855948816138687772
@@ -182,15 +228,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_17_3
+      name: player_17_jump2
       rect:
         serializedVersion: 2
         x: 604
         y: 228
         width: 184
-        height: 268
+        height: 271
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -203,19 +249,47 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_17_4
+      name: player_17_slide1
       rect:
         serializedVersion: 2
         x: 1
         y: 0
         width: 296
-        height: 186
+        height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
-      tessellationDetail: 0
+      physicsShape:
+      - - {x: 148, y: -17}
+        - {x: 142, y: 13}
+        - {x: 106, y: -1}
+        - {x: 88, y: 15}
+        - {x: 68, y: 20}
+        - {x: 16, y: -11}
+        - {x: 27, y: 18}
+        - {x: 19, y: 57}
+        - {x: -22, y: 93}
+        - {x: -82, y: 93}
+        - {x: -110, y: 76}
+        - {x: -132, y: 49}
+        - {x: -140, y: 7}
+        - {x: -148, y: -29}
+        - {x: -148, y: -65}
+        - {x: -140, y: -72}
+        - {x: -115, y: -62}
+        - {x: -100, y: -51}
+        - {x: -120, y: -85}
+        - {x: -104, y: -93}
+        - {x: -66, y: -93}
+        - {x: -29, y: -81}
+        - {x: 35, y: -89}
+        - {x: 65, y: -93}
+        - {x: 137, y: -93}
+        - {x: 148, y: -80}
+        - {x: 148, y: -52}
+        - {x: 139, y: -39}
+      tessellationDetail: 0.1
       bones: []
       spriteID: f398b9d0798f5aee0800000000000000
       internalID: -1250319993873397441
@@ -224,15 +298,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_17_5
+      name: player_17_slide2
       rect:
         serializedVersion: 2
-        x: 314
+        x: 303
         y: 1
-        width: 285
+        width: 296
         height: 188
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

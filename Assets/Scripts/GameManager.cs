@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
     public enum CONTROL_SCHEME {
         SWIPE, TOUCH, BUTTONS
@@ -22,70 +19,86 @@ public class GameManager : MonoBehaviour
     }
     private static CONTROL_SCHEME currentControls;
     private static int points;
-    // private static Toy currentToy;
     private static int playerSkinColour;
     private static CLOTHES_COLOUR playerClothesColour;
+    private static string currentToy;
+    private static List<string> boughtToys;
     private static Dictionary<string, bool> flags;
 
-    // Start is called before the first frame update
-    void Start()
+    static GameManager()
     {
         // initialise
-        // todo load values from save if possible
+        // todo load values from save if possible; player prefs?
         currentControls = CONTROL_SCHEME.BUTTONS;
         points = 0;
-        // todo current toy
+
+        playerSkinColour = 0;
+        playerClothesColour = CLOTHES_COLOUR.DARK_PAPER;
+
+        currentToy = "Teddy";
+        boughtToys = new List<string>();
+        boughtToys.Add("Teddy");
+
         flags = new Dictionary<string, bool>();
         flags["PAUSED"] = false;
-        flags["TUTORIAL_COMPLETE"] = false;
-
-        DontDestroyOnLoad(this.gameObject);
-        SceneManager.LoadScene("MainMenu");
+        flags["TUTORIAL_COMPLETE"] = false;   
     }
 
-    public CONTROL_SCHEME GetControls(){
+    public static CONTROL_SCHEME GetControls(){
         return currentControls;
     }
-    public void SetControls(CONTROL_SCHEME controls){
+    public static void SetControls(CONTROL_SCHEME controls){
         currentControls = controls;
     }
 
-    public int GetPoints(){
+    public static int GetPoints(){
         return points;
     }
-    public void AddPoints(int change){
+    public static void AddPoints(int change){
         points += change;
     }
-    public bool SpendPoints(int change){
+    public static bool SpendPoints(int change){
         if (change > points) return false;
         else {
-            change -= points;
+            points -= change;
             return true;
         }
     }
-
-    // get set toy
-    
-    public bool GetFlag(string flag){
+    public static bool GetFlag(string flag){
         return flags[flag];
     }
-    public void SetFlag(string flag, bool value){
+    public static void SetFlag(string flag, bool value){
         flags[flag] = value;
     }
 
-    public int GetSkinColour(){
+    public static int GetSkinColour(){
         return playerSkinColour;
     }
-    public CLOTHES_COLOUR GetClothesColour(){
+    public static CLOTHES_COLOUR GetClothesColour(){
         return playerClothesColour;
     }
-    public void SetSkinColour(int colour){
-        if (colour < 0 || colour > 9){
-            Debug.Log("incorrect skin index given: "+colour);
-        }
+    public static void SetSkinColour(int colour){
         playerSkinColour = colour;
     }
-    public void SetClothesColour(CLOTHES_COLOUR colour){
+    public static void SetClothesColour(CLOTHES_COLOUR colour){
         playerClothesColour = colour;
+    }
+
+    public static bool HasBoughtToy(string id){
+        return boughtToys.Contains(id);
+    }
+    public static void AddToy(string id){
+        // avoid duplication
+        if (!boughtToys.Contains(id)){
+            boughtToys.Add(id);
+        }
+    }
+    public static string GetCurrentToy(){
+        return currentToy;
+    }
+    public static void SetCurrentToy(string id){
+        if (boughtToys.Contains(id)){
+            currentToy = id;
+        }
     }
 }

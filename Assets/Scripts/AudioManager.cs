@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class AudioManager : MonoBehaviour
 
         if (mixer == null)
             mixer = Resources.Load<AudioMixer>("AudioMixer");
+
+        SceneManager.LoadScene(1);
     }
 
     // todo lower volume when game is paused

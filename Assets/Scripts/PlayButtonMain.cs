@@ -14,9 +14,8 @@ public class PlayButtonMain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         Button button = gameObject.GetComponent<Button>();
-        if (_gameManager.GetFlag("TUTORIAL_COMPLETE")){
+        if (GameManager.GetFlag("TUTORIAL_COMPLETE")){
            button.onClick.AddListener(() => levelMenu.SetActive(true));
            button.onClick.AddListener(() => mainMenu.SetActive(false));
         }
