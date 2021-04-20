@@ -13,22 +13,64 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;    
     private Vector2 touchStart;
     private Vector2 touchEnd;
-    private PLAYER_STATE currentState;
     private float jumpForce;
+    private PLAYER_STATE currentState;
+    private SpriteRenderer image;
+    private Dictionary<string, Sprite> sprites;
+    private PolygonCollider2D coll;
+    private List<Vector2> physicsShape;
+    private bool spriteChanged;
+    private float spriteTimerMax;
+    private float spriteTimerCurrent;
+
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        image = GetComponent<SpriteRenderer>();
+        coll = GetComponent<PolygonCollider2D>();
+
+        // initialise sprites
+        Sprite[] spritesheet = Resources.LoadAll<Sprite>("player_"+GameManager.GetSkinColour()+GameManager.GetClothesColour());
+        sprites = new Dictionary<string, Sprite>();
+        for (int i = 0; i < spritesheet.Length; i++){
+            sprites[spritesheet[i].name.Substring(10)] = spritesheet[i];
+        }
+        image.sprite = sprites["run1"];
+        physicsShape = new List<Vector2>();
+        image.sprite.GetPhysicsShape(0,physicsShape);
+        coll.SetPath(0,physicsShape);
 
         jumpForce = 10f;
-
         currentState = PLAYER_STATE.RUNNING;
+
+        spriteTimerMax = GameManager.GetCurrentLevel().startSpeed / 4f;
+        if (spriteTimerMax < 0.1f) spriteTimerMax = 0.1f;
+        spriteTimerCurrent = spriteTimerMax;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // fell in a hole
+        if (transform.position.y < -13){
+            SetState(PLAYER_STATE.DEAD);
+        }
+
+        // advance animation timer
+        spriteTimerCurrent -= Time.deltaTime;
+        if (spriteTimerCurrent < 0) {
+            // split current sprite name into state and frame
+            char index = image.sprite.name[image.sprite.name.Length-1];
+            string name = image.sprite.name.Substring(10);
+            name = name.Substring(0,name.Length-1);
+            if (index == '1')
+                image.sprite = sprites[name+'2'];
+            else image.sprite = sprites[name+'1'];
+            spriteTimerCurrent = spriteTimerMax;
+        }
+
         // input
         if (Input.touchCount > 0){
             Touch currentTouch = Input.GetTouch(0);
@@ -66,26 +108,36 @@ public class Player : MonoBehaviour
         }
     }
     void LateUpdate(){
-        // collision shape changes go here
+        if (spriteChanged){
+            image.sprite.GetPhysicsShape(0,physicsShape);
+            coll.SetPath(0,physicsShape);
+            spriteChanged = false;
+        }
     }
     private void SetState(PLAYER_STATE state){
-        // sprite animation goes here
+        if (state == currentState) return;
         switch(state){
+            case PLAYER_STATE.RUNNING:
+                image.sprite = sprites["run1"];
+            break;
             case PLAYER_STATE.JUMPING:
+                image.sprite = sprites["jump1"];
                 rb.AddForce(transform.up * jumpForce,ForceMode2D.Impulse);
+            break;
+            case PLAYER_STATE.SLIDING:
+                image.sprite = sprites["slide1"];
             break;
             default:
             break;
         }
         currentState = state;
+        spriteChanged = true;
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if (collider.tag == "Danger"){
+    void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject.tag == "Danger"){
             SetState(PLAYER_STATE.DEAD);
         }
-    }
-    void OnCollisionEnter2D(Collision2D collision){
         if (currentState == PLAYER_STATE.JUMPING)
             SetState(PLAYER_STATE.RUNNING);
     }
@@ -97,7 +149,7 @@ public class Player : MonoBehaviour
     }
     public void Slide(){
         if (currentState != PLAYER_STATE.SLIDING){
-            SetState(PLAYER_STATE.JUMPING);
+            SetState(PLAYER_STATE.SLIDING);
         }
     }
     public bool IsAlive(){

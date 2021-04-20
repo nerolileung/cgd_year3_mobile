@@ -5,13 +5,18 @@ public static class GameManager
     public enum CONTROL_SCHEME {
         SWIPE, TOUCH, BUTTONS
     }
+    public enum GAME_FLAGS{
+        PAUSED,
+        TUTORIAL_COMPLETE,
+        CONTROLS_CHANGED
+    }
     private static CONTROL_SCHEME currentControls;
     private static int points;
     private static int playerSkinColour;
     private static int playerClothesColour;
     private static string currentToy;
     private static List<string> boughtToys;
-    private static Dictionary<string, bool> flags;
+    private static Dictionary<GAME_FLAGS, bool> flags;
     private static LevelInfo currentLevel;
 
     static GameManager()
@@ -28,20 +33,23 @@ public static class GameManager
         boughtToys = new List<string>();
         boughtToys.Add("Teddy");
 
-        flags = new Dictionary<string, bool>();
-        flags["PAUSED"] = false;
-        flags["TUTORIAL_COMPLETE"] = false;
+        flags = new Dictionary<GAME_FLAGS, bool>();
+        flags[GAME_FLAGS.PAUSED] = false;
+        flags[GAME_FLAGS.TUTORIAL_COMPLETE] = false;
+        flags[GAME_FLAGS.CONTROLS_CHANGED] = true;
 
         currentLevel = null;
     }
-
+    #region controls
     public static CONTROL_SCHEME GetControls(){
         return currentControls;
     }
     public static void SetControls(CONTROL_SCHEME controls){
         currentControls = controls;
+        SetFlag(GAME_FLAGS.CONTROLS_CHANGED, true);
     }
-
+    #endregion
+    #region points
     public static int GetPoints(){
         return points;
     }
@@ -55,13 +63,16 @@ public static class GameManager
             return true;
         }
     }
-    public static bool GetFlag(string flag){
+    #endregion
+    #region flags
+    public static bool GetFlag(GAME_FLAGS flag){
         return flags[flag];
     }
-    public static void SetFlag(string flag, bool value){
+    public static void SetFlag(GAME_FLAGS flag, bool value){
         flags[flag] = value;
     }
-
+    #endregion
+    #region player colour
     public static int GetSkinColour(){
         return playerSkinColour;
     }
@@ -74,7 +85,8 @@ public static class GameManager
     public static void SetClothesColour(int colour){
         playerClothesColour = colour;
     }
-
+    #endregion
+    #region toys
     public static bool HasBoughtToy(string id){
         return boughtToys.Contains(id);
     }
@@ -97,11 +109,13 @@ public static class GameManager
         price *= 100;
         return (int)price;
     }
-
+    #endregion
+    #region level
     public static LevelInfo GetCurrentLevel(){
         return currentLevel;
     }
     public static void SetCurrentLevel(LevelInfo level){
         currentLevel = level;
     }
+    #endregion
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerColourMenu : MonoBehaviour
+public class PlayerColourSprite : MonoBehaviour
 {
     void Awake(){
         Image _image = GetComponent<Image>();

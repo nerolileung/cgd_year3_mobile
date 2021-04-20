@@ -15,13 +15,12 @@ public class PlayButtonMain : MonoBehaviour
     void Start()
     {
         Button button = gameObject.GetComponent<Button>();
-        if (GameManager.GetFlag("TUTORIAL_COMPLETE")){
+        if (GameManager.GetFlag(GameManager.GAME_FLAGS.TUTORIAL_COMPLETE)){
            button.onClick.AddListener(() => levelMenu.SetActive(true));
            button.onClick.AddListener(() => mainMenu.SetActive(false));
         }
         else {
             button.onClick.AddListener(()=>SceneManager.LoadScene("Level"));
-            button.onClick.AddListener(()=>SceneManager.LoadScene("HUD",LoadSceneMode.Additive));
             LevelInfo tutorial = Resources.Load<LevelInfo>("Tutorial");
             GameManager.SetCurrentLevel(tutorial);
         }
