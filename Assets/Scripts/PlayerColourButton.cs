@@ -29,7 +29,7 @@ public class PlayerColourButton : MonoBehaviour
         UpdateImage();
     }
     public void SetClothes(int colour){
-        GameManager.SetClothesColour((GameManager.CLOTHES_COLOUR)colour);
+        GameManager.SetClothesColour(colour);
         UpdateImage();
     }
     private void UpdateImage(){

@@ -8,6 +8,5 @@ public class ToyInfo : ScriptableObject
     public string displayName;
     [TextArea]
     public string description;
-    public int price;
     public Sprite image;
 }

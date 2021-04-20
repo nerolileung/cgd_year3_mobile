@@ -5,8 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - LevelManager
-  - GameManager
-  - AudioManager
+  - Danger
   layers:
   - Default
   - TransparentFX

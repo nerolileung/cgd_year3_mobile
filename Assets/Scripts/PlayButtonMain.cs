@@ -20,9 +20,10 @@ public class PlayButtonMain : MonoBehaviour
            button.onClick.AddListener(() => mainMenu.SetActive(false));
         }
         else {
-            // todo change to Real tutorial
-            button.onClick.AddListener(()=>SceneManager.LoadScene("Prototype"));
+            button.onClick.AddListener(()=>SceneManager.LoadScene("Level"));
             button.onClick.AddListener(()=>SceneManager.LoadScene("HUD",LoadSceneMode.Additive));
+            LevelInfo tutorial = Resources.Load<LevelInfo>("Tutorial");
+            GameManager.SetCurrentLevel(tutorial);
         }
     }
 }

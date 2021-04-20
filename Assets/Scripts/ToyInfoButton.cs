@@ -38,10 +38,11 @@ public class ToyInfoButton : MonoBehaviour
                 buttonText.text = "Equip";
         }
         else{
-            priceText.text = "Price: " + info.price.ToString() + " points";
+            priceText.text = string.Format("Price: {0:n0} points",GameManager.GetToyPrice());
             buttonText.text = "Buy";
         }
         imageDisplay.sprite = info.image;
         buttonText.GetComponentInParent<ToyBuyButton>().SetToy(info);
+        buttonText.GetComponentInParent<ToyBuyButton>().SetToyImage(GetComponent<Image>());
     }
 }

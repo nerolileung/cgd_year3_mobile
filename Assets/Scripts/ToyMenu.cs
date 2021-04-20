@@ -24,6 +24,13 @@ public class ToyMenu : MonoBehaviour
             GameObject clone = Instantiate(prefab,transform);
             clone.name = toys[i].name;
             clone.GetComponent<ToyInfoButton>().Init(toys[i]);
+
+            Image _image = clone.GetComponent<Image>();
+            _image.sprite = toys[i].image;
+            if (!GameManager.HasBoughtToy(toys[i].name))
+                _image.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            else if (GameManager.GetCurrentToy() != toys[i].name)
+                _image.color = new Color(0.6f, 0.6f, 0.6f, 1f);
         }
         pointsDisplay.text = GameManager.GetPoints().ToString();
     }

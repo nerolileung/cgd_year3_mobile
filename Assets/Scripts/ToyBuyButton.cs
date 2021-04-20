@@ -12,15 +12,17 @@ public class ToyBuyButton : MonoBehaviour
     [SerializeField]
     private Text pointsDisplay;
     private ToyInfo currentToy;
+    private Image currentToyButton;
     public void Click(){
         // todo sfx - toy noise or "error"
         switch (buttonText.text){
             case "Buy":
-                if (GameManager.SpendPoints(currentToy.price)){
+                if (GameManager.SpendPoints(GameManager.GetToyPrice())){
                     GameManager.AddToy(currentToy.name);
                     buttonText.text = "Equip";
                     priceText.text = "Already unlocked!";
                     pointsDisplay.text = GameManager.GetPoints().ToString();
+                    currentToyButton.color = new Color(0.6f, 0.6f, 0.6f, 1f);
                 }
                 else {
                     // error noise
@@ -29,7 +31,7 @@ public class ToyBuyButton : MonoBehaviour
             case "Equip":
                 GameManager.SetCurrentToy(currentToy.name);
                 buttonText.text = "Equipped";
-                // todo change toy sprite colour to indicate state
+                currentToyButton.color = Color.white;
             break;
             case "Equipped":
                 return;
@@ -40,5 +42,8 @@ public class ToyBuyButton : MonoBehaviour
     }
     public void SetToy(ToyInfo toy){
         currentToy = toy;
+    }
+    public void SetToyImage(Image button){
+        currentToyButton = button;
     }
 }

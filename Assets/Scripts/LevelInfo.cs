@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.Audio;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "Data", menuName = "LevelInfo", order = 1)]
 public class LevelInfo : ScriptableObject
@@ -10,6 +10,6 @@ public class LevelInfo : ScriptableObject
     //public Sprite icon;
     public float startSpeed;
     public float endSpeed;
-    // length in units/100px
-    public int levelLength;
+    public TextAsset map;
+    public AudioClip bgm;
 }

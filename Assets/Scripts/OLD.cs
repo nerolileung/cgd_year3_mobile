@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDManager : MonoBehaviour
+public class OLD : MonoBehaviour
 {
     private GameObject _camera;
     private float cameraOffset;
@@ -33,18 +33,19 @@ public class HUDManager : MonoBehaviour
             buttons.SetActive(true);
         else buttons.SetActive(false);
 
-        _info = Resources.Load<LevelInfo>("Levels/PInfo"); //temp
-        currentSpeed = _info.startSpeed;
-
         levelEndText = levelEndDisplay.GetComponentInChildren<Text>();
         levelEndDisplay.SetActive(false);
 
         points = 0;
+
+        _info = GameManager.GetCurrentLevel();
+        currentSpeed = _info.startSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         float offsetPosition = _camera.transform.position.x+cameraOffset;
         if (offsetPosition >= _info.levelLength){
             levelEndDisplay.SetActive(true);
@@ -58,7 +59,7 @@ public class HUDManager : MonoBehaviour
         else {
             levelEndDisplay.SetActive(true);
             levelEndText.text = "Level Incomplete...";
-        }
+        }*/
     }
     public void SetInfo(LevelInfo info){
         _info = info;

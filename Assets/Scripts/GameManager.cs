@@ -5,25 +5,14 @@ public static class GameManager
     public enum CONTROL_SCHEME {
         SWIPE, TOUCH, BUTTONS
     }
-    public enum CLOTHES_COLOUR {
-        DARK_PAPER = 0,
-        DARK_GREEN,
-        DARK_RED,
-        DARK_BLUE,
-        DARK_PURPLE,
-        LIGHT_INK,
-        LIGHT_GREEN,
-        LIGHT_RED,
-        LIGHT_BLUE,
-        LIGHT_PURPLE
-    }
     private static CONTROL_SCHEME currentControls;
     private static int points;
     private static int playerSkinColour;
-    private static CLOTHES_COLOUR playerClothesColour;
+    private static int playerClothesColour;
     private static string currentToy;
     private static List<string> boughtToys;
     private static Dictionary<string, bool> flags;
+    private static LevelInfo currentLevel;
 
     static GameManager()
     {
@@ -33,7 +22,7 @@ public static class GameManager
         points = 0;
 
         playerSkinColour = 0;
-        playerClothesColour = CLOTHES_COLOUR.DARK_PAPER;
+        playerClothesColour = 0;
 
         currentToy = "Teddy";
         boughtToys = new List<string>();
@@ -41,7 +30,9 @@ public static class GameManager
 
         flags = new Dictionary<string, bool>();
         flags["PAUSED"] = false;
-        flags["TUTORIAL_COMPLETE"] = false;   
+        flags["TUTORIAL_COMPLETE"] = false;
+
+        currentLevel = null;
     }
 
     public static CONTROL_SCHEME GetControls(){
@@ -74,13 +65,13 @@ public static class GameManager
     public static int GetSkinColour(){
         return playerSkinColour;
     }
-    public static CLOTHES_COLOUR GetClothesColour(){
+    public static int GetClothesColour(){
         return playerClothesColour;
     }
     public static void SetSkinColour(int colour){
         playerSkinColour = colour;
     }
-    public static void SetClothesColour(CLOTHES_COLOUR colour){
+    public static void SetClothesColour(int colour){
         playerClothesColour = colour;
     }
 
@@ -100,5 +91,17 @@ public static class GameManager
         if (boughtToys.Contains(id)){
             currentToy = id;
         }
+    }
+    public static int GetToyPrice(){
+        double price = System.Math.Pow(15,boughtToys.Count);
+        price *= 100;
+        return (int)price;
+    }
+
+    public static LevelInfo GetCurrentLevel(){
+        return currentLevel;
+    }
+    public static void SetCurrentLevel(LevelInfo level){
+        currentLevel = level;
     }
 }

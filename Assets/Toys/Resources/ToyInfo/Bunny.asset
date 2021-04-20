@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bunny
   m_EditorClassIdentifier: 
   displayName: Bunny
-  description: 'A fluffy bunny.
+  description: 'A floppy bunny.
 
     Makes you run faster.'
-  price: 100
-  image: {fileID: 21300000, guid: 8d6e811add9e64c49bc9c5270307b89a, type: 3}
+  price: 10000
+  image: {fileID: 21300000, guid: 00a04290eb753464097da29201306293, type: 3}
