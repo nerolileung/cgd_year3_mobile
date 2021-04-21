@@ -6,5 +6,6 @@ public class Tile : MonoBehaviour
 {
     void OnBecameInvisible(){
         gameObject.SetActive(false);
+        gameObject.tag = "Untagged";
     }
 }

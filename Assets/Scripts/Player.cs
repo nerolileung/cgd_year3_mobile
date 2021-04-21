@@ -19,8 +19,6 @@ public class Player : MonoBehaviour
     private Dictionary<string, Sprite> sprites;
     private PolygonCollider2D coll;
     private List<Vector2> physicsShape;
-    private bool spriteChanged;
-    private float spriteTimerMax;
     private float spriteTimerCurrent;
 
     
@@ -45,9 +43,8 @@ public class Player : MonoBehaviour
         jumpForce = 10f;
         currentState = PLAYER_STATE.RUNNING;
 
-        spriteTimerMax = GameManager.GetCurrentLevel().startSpeed / 4f;
-        if (spriteTimerMax < 0.1f) spriteTimerMax = 0.1f;
-        spriteTimerCurrent = spriteTimerMax;
+        spriteTimerCurrent = GameManager.GetCurrentLevel().startSpeed / 4f;
+        if (spriteTimerCurrent < 0.1f) spriteTimerCurrent = 0.1f;
     }
 
     // Update is called once per frame
@@ -68,7 +65,9 @@ public class Player : MonoBehaviour
             if (index == '1')
                 image.sprite = sprites[name+'2'];
             else image.sprite = sprites[name+'1'];
-            spriteTimerCurrent = spriteTimerMax;
+
+            spriteTimerCurrent = GameManager.GetCurrentLevel().startSpeed / 4f;
+                if (spriteTimerCurrent < 0.1f) spriteTimerCurrent = 0.1f;
         }
 
         // input
@@ -107,13 +106,6 @@ public class Player : MonoBehaviour
             }
         }
     }
-    void LateUpdate(){
-        if (spriteChanged){
-            image.sprite.GetPhysicsShape(0,physicsShape);
-            coll.SetPath(0,physicsShape);
-            spriteChanged = false;
-        }
-    }
     private void SetState(PLAYER_STATE state){
         if (state == currentState) return;
         switch(state){
@@ -131,15 +123,19 @@ public class Player : MonoBehaviour
             break;
         }
         currentState = state;
-        spriteChanged = true;
+        image.sprite.GetPhysicsShape(0,physicsShape);
+        coll.SetPath(0,physicsShape);
     }
 
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag == "Danger"){
             SetState(PLAYER_STATE.DEAD);
         }
-        if (currentState == PLAYER_STATE.JUMPING)
-            SetState(PLAYER_STATE.RUNNING);
+        // avoid walljumping
+        if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1){
+            if (currentState == PLAYER_STATE.JUMPING)
+                SetState(PLAYER_STATE.RUNNING);
+        }
     }
 
     public void Jump(){

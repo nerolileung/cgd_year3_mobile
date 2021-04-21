@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
                 if (levelMap[i][j] != ' '){
                     GameObject tile = _pooler.GetObject();
                     tile.transform.localPosition = new Vector3(j,-i,0f);
+                    SetSprite(tile, j, i);
                     if (levelMap[i][j] == 'x'){
                         tile.tag = "Danger";
                     }
@@ -115,6 +116,7 @@ public class LevelManager : MonoBehaviour
             if (levelMap[i][rightestTileX] != ' '){
                 GameObject tile = _pooler.GetObject();
                 tile.transform.localPosition = new Vector3(rightestTileX,-i,0f);
+                SetSprite(tile, rightestTileX, i);
                 if (levelMap[i][rightestTileX] == 'x') {
                     tile.tag = "Danger";
                 }
@@ -125,6 +127,22 @@ public class LevelManager : MonoBehaviour
         points += 10;
         pointsChanged = true;
         // todo _toy.OnPointGain();
+    }
+
+    private void SetSprite(GameObject tile, int x, int y){
+        int index = 0;
+
+        // check map edges and neighbouring tiles
+        if (x == 0 || levelMap[y][x-1] == ' ') // left empty
+            index += 1;
+        if (x == mapLength || levelMap[y][x+1] == ' ') // right
+            index += 2;
+        if (y == 0 || levelMap[y-1][x] == ' ') // up
+            index += 4;
+        if (y == 11 || levelMap[y+1][x] == ' ') // down
+            index += 8;
+        
+        tile.GetComponent<SpriteRenderer>().sprite = level.spritesheet[index];
     }
     public int GetPoints(){
         return points;

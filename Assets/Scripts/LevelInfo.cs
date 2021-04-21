@@ -11,5 +11,6 @@ public class LevelInfo : ScriptableObject
     public float startSpeed;
     public float endSpeed;
     public TextAsset map;
+    public Sprite[] spritesheet;
     public AudioClip bgm;
 }
