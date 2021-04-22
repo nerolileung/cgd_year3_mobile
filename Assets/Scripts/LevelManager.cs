@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     private int newTileX;
     private int rightestTileX;
     private int mapLength;
+    private int playerTileX;
     private Toy _toy;
     private LEVEL_STATE state;
     private int points;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         level = GameManager.GetCurrentLevel();
+        GameManager.SetFlag(GameManager.GAME_FLAGS.PAUSED,false);
 
         // load bgm
         if (level.bgm != null)
@@ -45,12 +47,21 @@ public class LevelManager : MonoBehaviour
                 mapLength = lines[i].Length;
         }
         mapLength -= 1;
+        // pass map length to player
+        Player _player = _camera.GetComponentInChildren<Player>();
+        _player.SetSpriteTimer(mapLength);
 
         // find distance between camera (player) and right edge of screen
         Camera cam = _camera.GetComponent<Camera>();
         Vector3 point = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth,cam.pixelHeight,0f));
         newTileX = Mathf.CeilToInt(point.x);
         rightestTileX = newTileX;
+
+        // put player at left side of screen with offset for sprite size and toy
+        /*Vector3 defaultPos = _player.transform.localPosition;
+        defaultPos.x = (rightestTileX * -1)+4;
+        _player.transform.localPosition = defaultPos;
+        playerTileX = Mathf.CeilToInt(defaultPos.x);*/
         
         // initialise map tiles
         for (int i = 0; i < levelMap.Length; i++){
@@ -78,16 +89,20 @@ public class LevelManager : MonoBehaviour
                 case LEVEL_STATE.PLAYING:
                 if (_camera.transform.position.x < mapLength){
                     // move player
-                    // todo float currentSpeed = Mathf.Lerp(level.startSpeed*_toy.GetSpeedModifier(),level.endSpeed,_camera.transform.position.x/mapLength);
-                    float currentSpeed = Mathf.Lerp(level.startSpeed,level.endSpeed,_camera.transform.position.x/mapLength);
+                    float currentSpeed = Mathf.Lerp(level.startSpeed*_toy.GetSpeedModifier(),level.endSpeed,_camera.transform.position.x/mapLength);
                     _camera.transform.Translate(currentSpeed * Time.deltaTime,0,0);
+
+                    // player moved into new tile
+                    if (_camera.transform.position.x > playerTileX){
+                        UpdatePoints();
+                        playerTileX = Mathf.CeilToInt(_camera.transform.position.x);
+                    }
 
                     // end of visible tiles reached
                     if (rightestTileX - _camera.transform.position.x < newTileX){
                         // there are map tiles left
                         if (rightestTileX < mapLength){
                             UpdateMap();
-                            UpdatePoints();
                         }
                         // show bookend
                         else if (!_mapBookend.activeInHierarchy) {
@@ -126,7 +141,7 @@ public class LevelManager : MonoBehaviour
     private void UpdatePoints(){
         points += 10;
         pointsChanged = true;
-        // todo _toy.OnPointGain();
+        _toy.OnPointGain();
     }
 
     private void SetSprite(GameObject tile, int x, int y){
@@ -146,6 +161,10 @@ public class LevelManager : MonoBehaviour
     }
     public int GetPoints(){
         return points;
+    }
+    public void ChangePoints(int change){
+        points += change;
+        pointsChanged = true;
     }
 
     public bool IsLevelComplete(){
