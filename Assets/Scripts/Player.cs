@@ -58,62 +58,67 @@ public class Player : MonoBehaviour
     {
         if (!GameManager.GetFlag(GameManager.GAME_FLAGS.PAUSED)){
             // fell in a hole
-            if (transform.position.y < -13){
+            if (transform.position.y < -4){
                 if (!_toy.OnFall())
                     SetState(PLAYER_STATE.DEAD);
             }
 
-            // advance animation timer
-            spriteTimerCurrent -= Time.deltaTime;
-            if (spriteTimerCurrent < 0) {
-                // split current sprite name into state and frame
-                char index = image.sprite.name[image.sprite.name.Length-1];
-                string name = image.sprite.name.Substring(10);
-                name = name.Substring(0,name.Length-1);
-                if (index == '1')
-                    image.sprite = sprites[name+'2'];
-                else image.sprite = sprites[name+'1'];
+            if (currentState != PLAYER_STATE.DEAD){
+                // advance animation timer
+                spriteTimerCurrent -= Time.deltaTime;
+                if (spriteTimerCurrent < 0) {
+                    // split current sprite name into state and frame
+                    char index = image.sprite.name[image.sprite.name.Length-1];
+                    string name = image.sprite.name.Substring(10);
+                    name = name.Substring(0,name.Length-1);
+                    if (index == '1')
+                        image.sprite = sprites[name+'2'];
+                    else image.sprite = sprites[name+'1'];
 
-                float speed = Mathf.Lerp(GameManager.GetCurrentLevel().startSpeed, GameManager.GetCurrentLevel().endSpeed, transform.position.x / spriteTimerMax);
-                spriteTimerCurrent = speed / 4f;
-                    if (spriteTimerCurrent < 0.1f) spriteTimerCurrent = 0.1f;
-            }
+                    float speed = Mathf.Lerp(GameManager.GetCurrentLevel().startSpeed, GameManager.GetCurrentLevel().endSpeed, transform.position.x / spriteTimerMax)*2f;
+                    spriteTimerCurrent = 1/speed;
+                        if (spriteTimerCurrent < 0.1f) spriteTimerCurrent = 0.1f;
+                }
 
-            // input
-            if (Input.touchCount > 0){
-                Touch currentTouch = Input.GetTouch(0);
-                // all controls: stop sliding when screen isn't touched
-                if (currentState == PLAYER_STATE.SLIDING && currentTouch.phase == TouchPhase.Ended) {
-                    SetState(PLAYER_STATE.RUNNING);
-                }
-                // single finger tap to jump, double finger hold to slide
-                if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.TOUCH){
-                    // slide
-                    if (Input.touchCount == 2){
-                        if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.SLIDING)
-                            SetState(PLAYER_STATE.SLIDING);
+                // input
+                if (Input.touchCount > 0){
+                    Touch currentTouch = Input.GetTouch(0);
+                    // all controls: stop sliding when screen isn't touched
+                    if (currentState == PLAYER_STATE.SLIDING && currentTouch.phase == TouchPhase.Ended) {
+                        SetState(PLAYER_STATE.RUNNING);
                     }
-                    // jump
-                    else {
-                        if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.JUMPING)
-                            SetState(PLAYER_STATE.JUMPING);
+                    // single finger tap to jump, double finger hold to slide
+                    if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.TOUCH){
+                        // slide
+                        if (Input.touchCount == 2){
+                            if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.SLIDING)
+                                SetState(PLAYER_STATE.SLIDING);
+                        }
+                        // jump
+                        else {
+                            if (currentTouch.phase == TouchPhase.Began && currentState!=PLAYER_STATE.JUMPING)
+                                SetState(PLAYER_STATE.JUMPING);
+                        }
                     }
-                }
-                // swipe up to jump, down + hold to slide
-                else if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.SWIPE){
-                    if (currentTouch.phase == TouchPhase.Began)
-                        touchStart = currentTouch.position;
-                    else if (currentTouch.phase == TouchPhase.Moved){
-                        touchEnd = currentTouch.position;
-                        // swipe up
-                        if (touchEnd.y - touchStart.y > 0 && currentState!=PLAYER_STATE.JUMPING)
-                            SetState(PLAYER_STATE.JUMPING);
-                        // swipe down
-                        else if (touchEnd.y - touchStart.y < 0 && currentState!=PLAYER_STATE.SLIDING)
-                            SetState(PLAYER_STATE.SLIDING);
+                    // swipe up to jump, down + hold to slide
+                    else if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.SWIPE){
+                        if (currentTouch.phase == TouchPhase.Began)
+                            touchStart = currentTouch.position;
+                        else if (currentTouch.phase == TouchPhase.Moved){
+                            touchEnd = currentTouch.position;
+                            // swipe up
+                            if (touchEnd.y - touchStart.y > 0 && currentState!=PLAYER_STATE.JUMPING)
+                                SetState(PLAYER_STATE.JUMPING);
+                            // swipe down
+                            else if (touchEnd.y - touchStart.y < 0 && currentState!=PLAYER_STATE.SLIDING)
+                                SetState(PLAYER_STATE.SLIDING);
+                        }
                     }
                 }
             }
+        }
+        else {
+            
         }
     }
     private void SetState(PLAYER_STATE state){

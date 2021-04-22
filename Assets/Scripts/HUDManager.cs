@@ -14,7 +14,9 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private GameObject levelEndMenu;
     [SerializeField]
-    private Text levelEndText;
+    private GameObject levelWinDisplay;
+    [SerializeField]
+    private GameObject levelLoseDisplay;
     private LevelManager _levelManager;
     [SerializeField]
     private Player _player;
@@ -46,11 +48,12 @@ public class HUDManager : MonoBehaviour
         // did player die?
         if (!_player.IsAlive()){
             _levelManager.SetLevelLost();
-            levelEndText.text = "Level Incomplete...";
+            levelLoseDisplay.SetActive(true);
         }
 
         if (_levelManager.IsLevelComplete()){
             levelEndMenu.SetActive(true);
+            levelWinDisplay.SetActive(true);
         }
     }
 }

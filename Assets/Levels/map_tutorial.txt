@@ -4,9 +4,9 @@
                                 xxx                                                                   
                                 xxx                                                                   
                                 xxx                              oooooooo                             
-                                xxx                              xxxxxxxx                             
+                                xxx                              xooooooo                             
                                                             ooo                                       
-                                                            xxx                                       
-oooooooooooooo  oooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo
-oooooooooooooo  oooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo
-oooooooooooooo  oooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo
+                                                            xoo                                       
+ooooooooooooooo  ooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo
+ooooooooooooooo  ooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo
+ooooooooooooooo  ooooooooooooooooooooooooooooooooooooooooooo             oooo    ooooooooooooooooooooo

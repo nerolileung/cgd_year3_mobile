@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Tutorial
   startSpeed: 1.8
-  endSpeed: 5
+  endSpeed: 5.5
   map: {fileID: 4900000, guid: 81c64851b5dc94270a8453676d2717ed, type: 3}
   spritesheet:
   - {fileID: 8772242419434164604, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
