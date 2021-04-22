@@ -11,14 +11,14 @@ public class ToyBuyButton : MonoBehaviour
     private Text buttonText;
     [SerializeField]
     private Text pointsDisplay;
-    private ToyInfo currentToy;
+    private string currentToy;
     private Image currentToyButton;
     public void Click(){
         // todo sfx - toy noise or "error"
         switch (buttonText.text){
             case "Buy":
                 if (GameManager.SpendPoints(GameManager.GetToyPrice())){
-                    GameManager.AddToy(currentToy.name);
+                    GameManager.AddToy(currentToy);
                     buttonText.text = "Equip";
                     priceText.text = "Already unlocked!";
                     pointsDisplay.text = GameManager.GetPoints().ToString();
@@ -29,7 +29,7 @@ public class ToyBuyButton : MonoBehaviour
                 }
             break;
             case "Equip":
-                GameManager.SetCurrentToy(currentToy.name);
+                GameManager.SetCurrentToy(currentToy);
                 buttonText.text = "Equipped";
                 currentToyButton.color = Color.white;
             break;
@@ -40,7 +40,7 @@ public class ToyBuyButton : MonoBehaviour
             break;
         }
     }
-    public void SetToy(ToyInfo toy){
+    public void SetToy(string toy){
         currentToy = toy;
     }
     public void SetToyImage(Image button){

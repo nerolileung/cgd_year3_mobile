@@ -117,9 +117,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else {
-            
-        }
     }
     private void SetState(PLAYER_STATE state){
         if (state == currentState) return;

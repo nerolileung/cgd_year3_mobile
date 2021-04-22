@@ -42,7 +42,7 @@ public class ToyInfoButton : MonoBehaviour
             buttonText.text = "Buy";
         }
         imageDisplay.sprite = info.image;
-        buttonText.GetComponentInParent<ToyBuyButton>().SetToy(info);
+        buttonText.GetComponentInParent<ToyBuyButton>().SetToy(info.name);
         buttonText.GetComponentInParent<ToyBuyButton>().SetToyImage(GetComponent<Image>());
     }
 }

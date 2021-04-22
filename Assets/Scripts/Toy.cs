@@ -48,14 +48,16 @@ public class Toy : MonoBehaviour
                 }
             }
 
-            // animate sprite
+            // default sprite animation
             spriteTimer -= Time.deltaTime;
             if (spriteTimer < 0){
                 if (_renderer.sprite == sprites[0]){
                     _renderer.sprite = sprites[1];
+                    transform.Translate(0f,0.05f,0f);
                 }
                 else if (_renderer.sprite == sprites[1]){
                     _renderer.sprite = sprites[0];
+                    transform.Translate(0f,-0.05f,0f);
                 }
                 else if (_renderer.sprite == sprites[2]){
                     _renderer.sprite = sprites[3];
@@ -63,10 +65,10 @@ public class Toy : MonoBehaviour
                 else if (_renderer.sprite == sprites[3]){
                     _renderer.sprite = sprites[2];
                 }
-                spriteTimer = 1f;
+                spriteTimer = 0.25f;
             }
 
-            // animate movement and size
+            // special effect movement/size animation
             if (state == TOY_STATE.EFFECTING){
                 if (transform.localPosition.x > 2.5f){
                     Vector3 scale = transform.localScale;
@@ -109,6 +111,10 @@ public class Toy : MonoBehaviour
     protected void OnEffectStart(){
         state = TOY_STATE.EFFECTING;
         _renderer.sprite = sprites[2];
+        Vector3 pos = transform.localPosition;
+        pos.x = 2.5f;
+        pos.y = 0f;
+        transform.localPosition = pos;
         effectReady = false;
     }
 }

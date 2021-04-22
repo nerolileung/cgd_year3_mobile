@@ -56,12 +56,6 @@ public class LevelManager : MonoBehaviour
         Vector3 point = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth,cam.pixelHeight,0f));
         newTileX = Mathf.CeilToInt(point.x);
         rightestTileX = newTileX;
-
-        // put player at left side of screen with offset for sprite size and toy
-        /*Vector3 defaultPos = _player.transform.localPosition;
-        defaultPos.x = (rightestTileX * -1)+4;
-        _player.transform.localPosition = defaultPos;
-        playerTileX = Mathf.CeilToInt(defaultPos.x);*/
         
         // initialise map tiles
         for (int i = 0; i < levelMap.Length; i++){

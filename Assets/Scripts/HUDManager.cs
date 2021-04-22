@@ -46,12 +46,12 @@ public class HUDManager : MonoBehaviour
         }
 
         // did player die?
-        if (!_player.IsAlive()){
+        if (!_player.IsAlive()&&!_levelManager.IsLevelComplete()){
             _levelManager.SetLevelLost();
             levelLoseDisplay.SetActive(true);
         }
 
-        if (_levelManager.IsLevelComplete()){
+        if (_levelManager.IsLevelComplete()&&!levelEndMenu.activeInHierarchy){
             levelEndMenu.SetActive(true);
             levelWinDisplay.SetActive(true);
         }

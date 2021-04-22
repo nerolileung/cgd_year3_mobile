@@ -21,7 +21,7 @@ public class PlayButtonMain : MonoBehaviour
         }
         else {
             button.onClick.AddListener(()=>SceneManager.LoadScene("Level"));
-            LevelInfo tutorial = Resources.Load<LevelInfo>("Tutorial");
+            LevelInfo tutorial = Resources.Load<LevelInfo>("LevelInfo/Tutorial");
             GameManager.SetCurrentLevel(tutorial);
         }
     }
