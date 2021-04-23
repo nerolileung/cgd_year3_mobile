@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003f18f75cc794bb3ae7383f019c4363, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  title: Beginnings
+  icon: {fileID: 21300000, guid: 3865368b3fb2a4c7ca4a48538983bfbd, type: 3}
+  tint: {r: 0, g: 0.03529412, b: 0.14509805, a: 1}
+  startSpeed: 1.8
+  endSpeed: 5.5
+  map: {fileID: 4900000, guid: 81c64851b5dc94270a8453676d2717ed, type: 3}
+  spritesheet:
+  - {fileID: 8772242419434164604, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 4005491854551932273, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -2092761016314400418, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -5059951570265924724, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -1958913835772984143, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 368282537925035650, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -512930760874573744, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 6367085167703075956, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 4314967909716173897, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 6258210730474207488, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -2780088713651415187, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 1798261914680630935, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 6909807694313861663, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -7438778846306974735, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: -1082564429394914645, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  - {fileID: 990672645416734837, guid: d9373b1e0ed5e4e368e9b10ddd89753d, type: 3}
+  bgm: {fileID: 0}
