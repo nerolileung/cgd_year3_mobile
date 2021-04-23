@@ -27,4 +27,13 @@ public class TilePooler : MonoBehaviour
         Debug.Log("No free objects in pool!");
         return null;
     }
+    public GameObject FindObject(int x, int y){
+        for (int i = 0; i < pool.Length; i++){
+            if (pool[i].activeInHierarchy && pool[i].transform.localPosition.x == x && pool[i].transform.localPosition.y == y) {
+                return pool[i];
+            }
+        }
+        //Debug.Log(string.Format("No active objects with coordinates {0} {1}!",x,y));
+        return null;
+    }
 }

@@ -30,7 +30,9 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         level = GameManager.GetCurrentLevel();
+        // resetting stuff
         GameManager.SetFlag(GameManager.GAME_FLAGS.PAUSED,false);
+        Time.timeScale = 1;
 
         // load bgm
         if (level.bgm != null)
@@ -83,7 +85,13 @@ public class LevelManager : MonoBehaviour
                 case LEVEL_STATE.PLAYING:
                 if (_camera.transform.position.x < mapLength){
                     // move player
-                    float currentSpeed = Mathf.Lerp(level.startSpeed*_toy.GetSpeedModifier(),level.endSpeed,_camera.transform.position.x/mapLength);
+                    float currentSpeed;
+                    if (_toy == null){
+                        currentSpeed = Mathf.Lerp(level.startSpeed,level.endSpeed,_camera.transform.position.x/mapLength);
+                    }
+                    else {
+                        currentSpeed = Mathf.Lerp(level.startSpeed*_toy.GetSpeedModifier(),level.endSpeed,_camera.transform.position.x/mapLength);
+                    }
                     _camera.transform.Translate(currentSpeed * Time.deltaTime,0,0);
 
                     // player moved into new tile
@@ -111,7 +119,7 @@ public class LevelManager : MonoBehaviour
                 }
                 break;
                 case LEVEL_STATE.WIN:
-                if (level.title == "Tutorial"){
+                if (level.name == "Tutorial"){
                         GameManager.SetFlag(GameManager.GAME_FLAGS.TUTORIAL_COMPLETE, true);
                     }
                 break;
@@ -135,7 +143,8 @@ public class LevelManager : MonoBehaviour
     private void UpdatePoints(){
         points += 10;
         pointsChanged = true;
-        _toy.OnPointGain();
+        if (_toy != null)
+            _toy.OnPointGain();
     }
 
     private void SetSprite(GameObject tile, int x, int y){
@@ -171,5 +180,11 @@ public class LevelManager : MonoBehaviour
 
     public void SetToy(Toy value){
         _toy = value;
+    }
+    public GameObject GetTileAt(int x, int y){
+        // out of array bounds
+        if (x < 0 || x > mapLength) return null;
+        if (y > 0 || y < -11) return null;
+        return _pooler.FindObject(x,y);
     }
 }

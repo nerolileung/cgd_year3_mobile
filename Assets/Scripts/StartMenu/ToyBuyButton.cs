@@ -29,6 +29,9 @@ public class ToyBuyButton : MonoBehaviour
                 }
             break;
             case "Equip":
+                // clear previous
+                GameObject.Find(GameManager.GetCurrentToy()).GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f, 1f);
+                // set current
                 GameManager.SetCurrentToy(currentToy);
                 buttonText.text = "Equipped";
                 currentToyButton.color = Color.white;

@@ -18,6 +18,7 @@ public static class GameManager
     private static List<string> boughtToys;
     private static Dictionary<GAME_FLAGS, bool> flags;
     private static LevelInfo currentLevel;
+    private static Dictionary<string, List<int>> scores;
 
     static GameManager()
     {
@@ -31,7 +32,7 @@ public static class GameManager
 
         currentToy = "Teddy";
         boughtToys = new List<string>();
-        boughtToys.Add("Teddy");
+        boughtToys.Add(currentToy);
 
         flags = new Dictionary<GAME_FLAGS, bool>();
         flags[GAME_FLAGS.PAUSED] = false;
@@ -39,6 +40,7 @@ public static class GameManager
         flags[GAME_FLAGS.CONTROLS_CHANGED] = true;
 
         currentLevel = null;
+        scores = new Dictionary<string, List<int>>();
     }
     #region controls
     public static CONTROL_SCHEME GetControls(){
@@ -116,6 +118,37 @@ public static class GameManager
     }
     public static void SetCurrentLevel(LevelInfo level){
         currentLevel = level;
+        if (!scores.ContainsKey(level.name)){
+            scores[level.name] = new List<int>();
+        }
+    }
+    public static List<int> GetScores(string level){
+        return scores[level];
+    }
+    public static bool AddCurrentScore(int newScore){
+        List<int> levelScores = scores[currentLevel.name];
+        // no saved scores
+        if (levelScores.Count == 0){
+            levelScores.Add(newScore);
+            return true;
+        }
+        for (int i = 0; i < levelScores.Count; i++){
+            // new high score
+            if (newScore > levelScores[i]){
+                levelScores.Add(newScore);
+                levelScores.Sort();
+                // more than 8 scores saved
+                if (levelScores.Count > 8)
+                    levelScores.RemoveAt(8);
+                return true;
+            }
+            // not a new high score, but still a score
+            else if (i == levelScores.Count && i < 8){
+                levelScores.Add(newScore);
+                levelScores.Sort();
+            }
+        }
+        return false;
     }
     #endregion
 }

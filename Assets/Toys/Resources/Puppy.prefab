@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3355695313358539951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202047205621647841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dca4d7b1bd984d9db0a4b4b3dc66857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: e6b4fe68182cb4fb0b8612cabe163119, type: 3}
+  - {fileID: 21300000, guid: e6b4fe68182cb4fb0b8612cabe163119, type: 3}
+  - {fileID: 21300000, guid: e6b4fe68182cb4fb0b8612cabe163119, type: 3}
+  - {fileID: 21300000, guid: e6b4fe68182cb4fb0b8612cabe163119, type: 3}
+--- !u!1001 &2961834808703887307
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5397637642080939560, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e6b4fe68182cb4fb0b8612cabe163119, type: 3}
+    - target: {fileID: 5397637642080939561, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397637642080939561, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397637642080939561, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397637642080939561, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5397637642080939562, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+      propertyPath: m_Name
+      value: Puppy
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5397637642080939607, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+--- !u!1 &7202047205621647841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5397637642080939562, guid: 9d7b4784c2404423881f9c0d3c8e15dd, type: 3}
+  m_PrefabInstance: {fileID: 2961834808703887307}
+  m_PrefabAsset: {fileID: 0}

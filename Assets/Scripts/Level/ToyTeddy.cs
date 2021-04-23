@@ -12,6 +12,7 @@ public class ToyTeddy : Toy
         timerMax = 10f;
         timerCurrent = timerMax;
         effectReady = false;
+        effectOneShot = true;
     }
 
     // Update is called once per frame

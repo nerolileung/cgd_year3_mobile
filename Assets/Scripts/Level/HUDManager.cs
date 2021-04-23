@@ -17,6 +17,8 @@ public class HUDManager : MonoBehaviour
     private GameObject levelWinDisplay;
     [SerializeField]
     private GameObject levelLoseDisplay;
+    [SerializeField]
+    private Text levelScoreText;
     private LevelManager _levelManager;
     [SerializeField]
     private Player _player;
@@ -48,12 +50,22 @@ public class HUDManager : MonoBehaviour
         // did player die?
         if (!_player.IsAlive()&&!_levelManager.IsLevelComplete()){
             _levelManager.SetLevelLost();
+            levelEndMenu.SetActive(true);
+            DisplayFinalScore();
             levelLoseDisplay.SetActive(true);
         }
 
         if (_levelManager.IsLevelComplete()&&!levelEndMenu.activeInHierarchy){
             levelEndMenu.SetActive(true);
+            DisplayFinalScore();
             levelWinDisplay.SetActive(true);
         }
+    }
+    private void DisplayFinalScore(){
+        if (GameManager.AddCurrentScore(_levelManager.GetPoints()))
+            levelScoreText.text = "NEW HIGH SCORE: ";
+        else levelScoreText.text = "Score: ";
+        if (_levelManager.GetPoints() > 999999) levelScoreText.text+="\n";
+        levelScoreText.text = string.Format("{0}{1:n0}",levelScoreText.text,_levelManager.GetPoints());
     }
 }

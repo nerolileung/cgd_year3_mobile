@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Toy : MonoBehaviour
 {
-    private enum TOY_STATE{
+    protected enum TOY_STATE{
         MOVING,
-        EFFECTING
+        AFFECTING,
+        EFFECT_END
     }
     protected LevelManager _levelManager;
+    protected Player _player;
     protected float speedMod;
     protected bool useTimer;
     protected float timerCurrent;
     protected float timerMax;
     protected bool effectReady;
-    private TOY_STATE state;
+    protected bool effectOneShot;
+    protected TOY_STATE state;
     
     [SerializeField]
     private Sprite[] sprites;
@@ -33,6 +36,7 @@ public class Toy : MonoBehaviour
         state = TOY_STATE.MOVING;
 
         speedMod = 1f;
+        effectOneShot = true;
     }
 
     // Update is called once per frame
@@ -69,32 +73,41 @@ public class Toy : MonoBehaviour
             }
 
             // special effect movement/size animation
-            if (state == TOY_STATE.EFFECTING){
+            switch (state){
+                case TOY_STATE.AFFECTING:
                 if (transform.localPosition.x > 2.5f){
+                    transform.Translate(Time.deltaTime*5f,0f,0f);
+                }
+                else if (transform.localScale.x < 2.5f){
                     Vector3 scale = transform.localScale;
                     scale.x += Time.deltaTime*1.5f;
                     scale.y += Time.deltaTime*1.5f;
                     transform.localScale = scale;
-                    if (transform.localScale.x > 2.5f){
-                        state = TOY_STATE.MOVING;
+
+                    if (transform.localScale.x > 2.5f && effectOneShot){
+                        state = TOY_STATE.EFFECT_END;
                         _renderer.sprite = sprites[0];
                     }
                 }
-                else
-                    transform.Translate(Time.deltaTime*5f,0f,0f);
-            }
-            else {
+                break;
+                case TOY_STATE.EFFECT_END:
                 if (transform.localPosition.x > -2.5f){
                     transform.Translate(Time.deltaTime*-7.5f,0f,0f);
                     if (transform.localPosition.x < -2.5f){
-                        transform.localPosition = new Vector3(-2.5f,0f,0f);
+                        transform.localPosition = new Vector3(-2.5f,0f,-5f);
                     }
                 }
                 if (transform.localScale.x > 2.5f){
                     transform.localScale = new Vector3(1.5f,1.5f,1f);
                 }
+                break;
+                default:
+                break;
             }
         }
+    }
+    public void SetPlayer(Player _p){
+        _player = _p;
     }
     public float GetSpeedModifier(){
         return speedMod;
@@ -109,7 +122,7 @@ public class Toy : MonoBehaviour
         return false;
     }
     protected void OnEffectStart(){
-        state = TOY_STATE.EFFECTING;
+        state = TOY_STATE.AFFECTING;
         _renderer.sprite = sprites[2];
         Vector3 pos = transform.localPosition;
         pos.x = 2.5f;

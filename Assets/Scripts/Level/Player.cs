@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Vector2 touchStart;
     private Vector2 touchEnd;
     private float jumpForce;
+    private bool ghost;
     private PLAYER_STATE currentState;
     private SpriteRenderer image;
     private Dictionary<string, Sprite> sprites;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
         // initialise toy
         GameObject toyPrefab = Resources.Load<GameObject>(GameManager.GetCurrentToy());
         _toy = Instantiate(toyPrefab,transform).GetComponent<Toy>();
+        _toy.SetPlayer(this);
 
         // initialise sprites
         Sprite[] spritesheet = Resources.LoadAll<Sprite>("player_"+GameManager.GetSkinColour()+GameManager.GetClothesColour());
@@ -141,7 +143,8 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision){
         if (collision.gameObject.tag == "Danger"){
-            SetState(PLAYER_STATE.DEAD);
+            if (!_toy.OnHit())
+                SetState(PLAYER_STATE.DEAD);
         }
         // avoid walljumping
         if (Mathf.Abs(collision.transform.position.x - transform.position.x) < 1){
@@ -165,5 +168,9 @@ public class Player : MonoBehaviour
     }
     public void SetSpriteTimer(float max){
         spriteTimerMax = max;
+    }
+    public void SetGhost(bool value){
+        ghost = value;
+        coll.enabled = !ghost;
     }
 }

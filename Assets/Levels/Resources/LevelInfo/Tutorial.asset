@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003f18f75cc794bb3ae7383f019c4363, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: 
-  title: Tutorial
+  title: Beginnings
   startSpeed: 1.8
   endSpeed: 5.5
   map: {fileID: 4900000, guid: 81c64851b5dc94270a8453676d2717ed, type: 3}
