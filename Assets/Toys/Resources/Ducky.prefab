@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 94ffd944bbd2840cb8f2e24c10a232ef, type: 3}
-  - {fileID: 21300000, guid: 94ffd944bbd2840cb8f2e24c10a232ef, type: 3}
-  - {fileID: 21300000, guid: 94ffd944bbd2840cb8f2e24c10a232ef, type: 3}
-  - {fileID: 21300000, guid: 94ffd944bbd2840cb8f2e24c10a232ef, type: 3}
+  - {fileID: -6639137591251483819, guid: 02533d9c810d0446fbb3184005045b0f, type: 3}
+  - {fileID: -2488936391432022938, guid: 02533d9c810d0446fbb3184005045b0f, type: 3}
+  - {fileID: -2290878023322585885, guid: 02533d9c810d0446fbb3184005045b0f, type: 3}
+  - {fileID: -8833474704532599318, guid: 02533d9c810d0446fbb3184005045b0f, type: 3}
 --- !u!1001 &4611639296453518915
 PrefabInstance:
   m_ObjectHideFlags: 0

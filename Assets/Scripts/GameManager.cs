@@ -123,6 +123,9 @@ public static class GameManager
         }
     }
     public static List<int> GetScores(string level){
+        if (!scores.ContainsKey(level)){
+            return new List<int>();
+        }
         return scores[level];
     }
     public static bool AddCurrentScore(int newScore){
@@ -137,15 +140,19 @@ public static class GameManager
             if (newScore > levelScores[i]){
                 levelScores.Add(newScore);
                 levelScores.Sort();
+                levelScores.Reverse();
                 // more than 8 scores saved
                 if (levelScores.Count > 8)
                     levelScores.RemoveAt(8);
                 return true;
             }
             // not a new high score, but still a score
-            else if (i == levelScores.Count && i < 8){
+            else if (levelScores.Count < 8){
                 levelScores.Add(newScore);
                 levelScores.Sort();
+                // todo implement more cleanly
+                levelScores.Reverse();
+                break;
             }
         }
         return false;

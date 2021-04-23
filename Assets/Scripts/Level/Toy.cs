@@ -75,7 +75,7 @@ public class Toy : MonoBehaviour
             // special effect movement/size animation
             switch (state){
                 case TOY_STATE.AFFECTING:
-                if (transform.localPosition.x > 2.5f){
+                if (transform.localPosition.x < 2.5f){
                     transform.Translate(Time.deltaTime*5f,0f,0f);
                 }
                 else if (transform.localScale.x < 2.5f){
@@ -95,6 +95,7 @@ public class Toy : MonoBehaviour
                     transform.Translate(Time.deltaTime*-7.5f,0f,0f);
                     if (transform.localPosition.x < -2.5f){
                         transform.localPosition = new Vector3(-2.5f,0f,-5f);
+                        state = TOY_STATE.MOVING;
                     }
                 }
                 if (transform.localScale.x > 2.5f){
@@ -125,7 +126,7 @@ public class Toy : MonoBehaviour
         state = TOY_STATE.AFFECTING;
         _renderer.sprite = sprites[2];
         Vector3 pos = transform.localPosition;
-        pos.x = 2.5f;
+        pos.x = -2.5f;
         pos.y = 0f;
         transform.localPosition = pos;
         effectReady = false;

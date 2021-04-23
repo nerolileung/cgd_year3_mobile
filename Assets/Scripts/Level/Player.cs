@@ -66,6 +66,9 @@ public class Player : MonoBehaviour
             }
 
             if (currentState != PLAYER_STATE.DEAD){
+                // move back to center
+                transform.Translate(-transform.localPosition.x*Time.deltaTime,0f,0f,Space.Self);
+
                 // advance animation timer
                 spriteTimerCurrent -= Time.deltaTime;
                 if (spriteTimerCurrent < 0) {

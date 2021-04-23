@@ -7,7 +7,8 @@ using UnityEngine.Audio;
 public class LevelInfo : ScriptableObject
 {
     public string title;
-    //public Sprite icon;
+    public Sprite icon;
+    public Color tint;
     public float startSpeed;
     public float endSpeed;
     public TextAsset map;
