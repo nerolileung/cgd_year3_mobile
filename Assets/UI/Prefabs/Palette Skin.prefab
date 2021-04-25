@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 2185805783387998610}
   - component: {fileID: 2185805783387998609}
   - component: {fileID: 2185805783387998612}
+  - component: {fileID: 6400606125210440130}
   m_Layer: 5
-  m_Name: Skin 0
+  m_Name: Palette Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6400606125210440130}
+        m_TargetAssemblyTypeName: AudioUI_SFX, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 4106e0de240a54a31bd0c2ea1db921e0, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2185805783387998612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,5 +155,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f0177ee11c644e0c9d46543bcee738d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6400606125210440130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2185805783387998623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d024030e09592447284734c1b1a6589b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
