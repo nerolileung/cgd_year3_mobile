@@ -27,6 +27,9 @@ public class HUDManager : MonoBehaviour
     void Start()
     {
         _levelManager = GetComponent<LevelManager>();
+        if (GameManager.GetControls() == GameManager.CONTROL_SCHEME.BUTTONS)
+            buttons.SetActive(true);
+        else buttons.SetActive(false);
     }
 
     // Update is called once per frame
