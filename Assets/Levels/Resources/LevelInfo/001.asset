@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 013e51cb1f72c4aac8234da0adff78f6, type: 3}
   tint: {r: 0.4302537, g: 0.23113209, b: 1, a: 1}
   startSpeed: 4
-  endSpeed: 8
+  endSpeed: 6
   map: {fileID: 4900000, guid: d4c5aa4cb38834a2da887e68f4f83e15, type: 3}
   spritesheet:
   - {fileID: -7132242922577115405, guid: eaeea4afcf10f40d38a2a801942a5370, type: 3}

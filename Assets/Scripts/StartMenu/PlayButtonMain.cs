@@ -7,17 +7,17 @@ using UnityEngine.SceneManagement;
 public class PlayButtonMain : MonoBehaviour
 {
     [SerializeField]
-    private GameObject levelMenu;
+    private Canvas levelMenu;
     [SerializeField]
-    private GameObject mainMenu;
+    private Canvas mainMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         Button button = gameObject.GetComponent<Button>();
         if (GameManager.GetFlag(GameManager.GAME_FLAGS.TUTORIAL_COMPLETE)){
-           button.onClick.AddListener(() => levelMenu.SetActive(true));
-           button.onClick.AddListener(() => mainMenu.SetActive(false));
+           button.onClick.AddListener(() => levelMenu.enabled = true);
+           button.onClick.AddListener(() => mainMenu.enabled = false);
         }
         else {
             button.onClick.AddListener(()=>SceneManager.LoadScene("Level"));
