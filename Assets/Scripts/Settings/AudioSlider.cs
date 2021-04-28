@@ -7,10 +7,6 @@ public class AudioSlider : MonoBehaviour
 {
     [SerializeField]
     private Text textField;
-    [SerializeField]
-    private Slider sfxSlider;
-    [SerializeField]
-    private Slider bgmSlider;
 
     public void ChangeVolume(float volume){
         switch (gameObject.name){
