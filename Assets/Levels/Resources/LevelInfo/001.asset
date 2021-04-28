@@ -35,4 +35,4 @@ MonoBehaviour:
   - {fileID: 1772357363303182111, guid: eaeea4afcf10f40d38a2a801942a5370, type: 3}
   - {fileID: 7879079809077378858, guid: eaeea4afcf10f40d38a2a801942a5370, type: 3}
   - {fileID: -3016100433714510939, guid: eaeea4afcf10f40d38a2a801942a5370, type: 3}
-  bgm: {fileID: 0}
+  bgm: {fileID: 8300000, guid: da49a35fd06c54fe69abe1b7dc121418, type: 3}
